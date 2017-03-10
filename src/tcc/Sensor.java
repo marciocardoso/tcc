@@ -3,15 +3,23 @@
  */
 package tcc;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Labin-L1
  */
 public class Sensor {
     
+    //Alcance Padrão do sensor
+    public int ALCANCE = 15;
+    
     //coordenadas do sensor no Plano
     int x;
     int y;
+    
+    //guarda todos os componentes conexos deste sensor
+    public ArrayList connected_sensors = new ArrayList<Sensor>();
     
     //atribui uma posição aleatória ao sensor;
     public Sensor()
@@ -29,6 +37,12 @@ public class Sensor {
     public int getY()
     {
         return this.y;
+    }
+    
+    //retorna o número de sensores conexos a este
+    public int numberOfConnectedSensors()
+    {
+        return this.connected_sensors.size();
     }
     
     

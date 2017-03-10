@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Sensor {
     
     //Alcance Padrão do sensor
-    public int ALCANCE = 15;
+    public double ALCANCE = 15.0;
     
     //coordenadas do sensor no Plano
     int x;
@@ -40,9 +40,14 @@ public class Sensor {
     }
     
     //retorna o número de sensores conexos a este
-    public int numberOfConnectedSensors()
+    public int getNumberOfConnectedSensors()
     {
         return this.connected_sensors.size();
+    }
+    
+    public void addConnectedSensor( Sensor sensor )
+    {
+        this.connected_sensors.add(sensor);
     }
     
     
@@ -55,6 +60,6 @@ public class Sensor {
         double distance = Math.sqrt( xDistance*xDistance + yDistance*yDistance );
         
         return distance;
-    }
+    }   
     
 }

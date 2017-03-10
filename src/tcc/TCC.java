@@ -15,7 +15,17 @@ public class TCC {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        WSN wsn = new WSN();
+        
+        wsn.findConnectedSensors();
+        
+        wsn.findConnectedSensors();
+        
+        for( int i = 0; i < wsn.getNumberOfSensores(); i++ )
+        {
+            System.out.println("O sensor " + i + " está conectado a " + wsn.getSensor(i).getNumberOfConnectedSensors() );
+        }
     }
     
 }

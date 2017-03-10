@@ -26,8 +26,34 @@ public class WSN {
     //vetor com sensores 
     private ArrayList sensores = new ArrayList<Sensor>();
     
-    //inicializa a WSN com pelo menos 20 sensores
+    //retorna um sensor especifico
+    public Sensor getSensor( int index )
+    {
+        return (Sensor)this.sensores.get(index);
+    }
+    
+    //retorna o número de sensores na rede
+    public int getNumberOfSensores()
+    {
+        return this.sensores.size();
+    }
     
     
+    public void findConnectedSensors()
+    {
+        for( int i = 0; i < this.sensores.size(); i++ )
+        {
+            for( int j = 0; j < this.sensores.size(); j ++)
+            {
+                if( i != j )
+                {
+                    if( getSensor(i).distanceTo(getSensor(j)) <= new Sensor().ALCANCE ) 
+                    {
+                        getSensor(i).addConnectedSensor( getSensor(j) );
+                    }
+                }
+            }
+        }
+    }
     
 }

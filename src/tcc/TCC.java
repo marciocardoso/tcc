@@ -33,5 +33,7 @@ public class TCC {
         System.out.println("");
         System.out.println(pop.getFittest().getNumberOfConnectedComps());
     }
+    
+    //testando clone
 
 }

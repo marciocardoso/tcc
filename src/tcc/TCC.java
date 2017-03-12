@@ -5,6 +5,11 @@
  */
 package tcc;
 
+import java.util.Set;
+import org.jgraph.graph.DefaultEdge;
+import org.jgrapht.UndirectedGraph;
+import org.jgrapht.graph.SimpleGraph;
+
 /**
  *
  * @author Labin-L1
@@ -15,17 +20,18 @@ public class TCC {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        Population pop = new Population(30, true);
         
-        WSN wsn = new WSN();
-        
-        wsn.findConnectedSensors();
-        
-        wsn.findConnectedSensors();
-        
-        for( int i = 0; i < wsn.getNumberOfSensores(); i++ )
-        {
-            System.out.println("O sensor " + i + " está conectado a " + wsn.getSensor(i).getNumberOfConnectedSensors() );
+        for( int i = 0; i < 30; i++) {            
+            System.out.print(pop.getWSN(i).getNumberOfConnectedComps() + "  ");
+            if( i==9 || i==19 || i==29) {
+                System.out.println("");
+            }
         }
+        
+        System.out.println("");
+        System.out.println(pop.getFittest().getNumberOfConnectedComps());
     }
-    
+
 }

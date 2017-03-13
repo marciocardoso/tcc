@@ -27,8 +27,17 @@ public class TCC {
         
         System.out.println("");
         System.out.println(pop.getFittest().getNumberOfConnectedComps());
+        
+        //teste 2
+        System.out.println("");
+        System.out.println(pop.getWSN(0).getSensor(0).getX());
+        System.out.println(pop.getWSN(0).getSensor(0).getY());
+        
+        pop.getWSN(0).changeSensorPosition(0, 10, 10);
+        
+        System.out.println("");
+        System.out.println(pop.getWSN(0).getSensor(0).getX());
+        System.out.println(pop.getWSN(0).getSensor(0).getY());
     }
-    
-    //testando clone
 
 }

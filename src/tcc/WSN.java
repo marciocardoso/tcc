@@ -118,6 +118,15 @@ public class WSN {
         this.refreshGraphEdges();
     }
     
+    //muda as coordenadas do sensor na posição INDEX, para as coordenadas dadas
+    public void changeSensorPosition(int index, int newX, int newY) {
+        getSensor(index).setX(newX);
+        getSensor(index).setY(newY);
+        
+        //atualiza as arestas
+        this.refreshGraphEdges();
+    }
+    
     
     //retorna o fitness de cada wsn.
     //quanto menor o numero de grafos conexos, melhor.

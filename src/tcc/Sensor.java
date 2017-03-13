@@ -34,6 +34,14 @@ public class Sensor {
     public int getY() {
         return this.y;
     }
+    
+    public void setX(int newX) {
+        this.x = newX;
+    }
+    
+    public void setY(int newY) {
+        this.y = newY;
+    }
 
     //retorna o número de sensores conexos a este
     /*public int getNumberOfConnectedSensors() {

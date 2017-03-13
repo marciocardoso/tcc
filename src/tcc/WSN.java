@@ -59,7 +59,7 @@ public class WSN {
     }
 
     //encontra todas as arestas do grafo deste WSN
-    public void setGraphEdges() {
+    private void setGraphEdges() {
         for (int i = 0; i < this.sensorList.size(); i++) {
             for (int j = 0; j < this.sensorList.size(); j++) {
                 if (i != j) {
@@ -97,7 +97,7 @@ public class WSN {
     //Caso algum sensor mude de lugar, seja removido
     //ou adicionado: Remove todas as arestas
     //para que novas sejam adicionadas
-    public void removeAllGraphEdges() {
+    public void refreshGraphEdges() {
         for (int i = 0; i < this.sensorList.size(); i++) {
             for (int j = 0; j < this.sensorList.size(); j++) {
                 if (i != j) {
@@ -105,7 +105,19 @@ public class WSN {
                 }
             }
         }
+        this.setGraphEdges();
     }
+    
+    //remove um sensor da rede
+    public void removeSensor(int index) {
+        //remove tanto da lista de sensores quanto do grafo
+        this.sensorList.remove(index);
+        this.graph.removeVertex(getSensor(index));
+        
+        //atualiza as arestas
+        this.refreshGraphEdges();
+    }
+    
     
     //retorna o fitness de cada wsn.
     //quanto menor o numero de grafos conexos, melhor.

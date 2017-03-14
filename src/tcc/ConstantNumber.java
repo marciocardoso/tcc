@@ -11,7 +11,8 @@ package tcc;
  */
 public class ConstantNumber {
     
-    public static final double SENSOR_RANGE = 12.0;
+    public static final int WIRELESS_SENSOR_NETWORK_SIZE = 15;
+    public static final double SENSOR_RANGE = 10.0;
     public static final double X_MAX = 73.0;
     public static final double Y_MAX = 73.0;   
     public static final int NUMBER_OF_SENSORS = 20;

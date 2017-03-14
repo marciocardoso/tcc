@@ -49,6 +49,8 @@ public class Population {
         return fittest;
     }
     
+    
+    
     public int getPopSize() {
         return this.WSNS.length;
     }

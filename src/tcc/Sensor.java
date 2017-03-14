@@ -3,15 +3,11 @@
  */
 package tcc;
 
-
 /**
  *
  * @author Labin-L1
  */
 public class Sensor {
-
-    //Alcance Padrão do sensor
-    public double ALCANCE = 12.0;
 
     //coordenadas do sensor no Plano
     int x;
@@ -19,11 +15,15 @@ public class Sensor {
 
     //guarda todos os componentes conexos deste sensor
     //private ArrayList connected_sensors = new ArrayList<Sensor>();
-
     //atribui uma posição aleatória ao sensor;
     public Sensor() {
         this.x = (int) (Math.random() * ConstantNumber.X_MAX);
         this.y = (int) (Math.random() * ConstantNumber.Y_MAX);
+    }
+
+    public Sensor(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     //gets para as coordenadas
@@ -34,11 +34,11 @@ public class Sensor {
     public int getY() {
         return this.y;
     }
-    
+
     public void setX(int newX) {
         this.x = newX;
     }
-    
+
     public void setY(int newY) {
         this.y = newY;
     }
@@ -51,7 +51,6 @@ public class Sensor {
     public void addConnectedSensor(Sensor sensor) {
         this.connected_sensors.add(sensor);
     }*/
-
     //calcula e retorna a distance deste sensor até qualquer outro        
     public double distanceTo(Sensor sensor) {
         int xDistance = Math.abs(getX() - sensor.getX());

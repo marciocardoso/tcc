@@ -19,7 +19,7 @@ public class TCC {
         Population pop = new Population(30, true);
 
         for (int i = 0; i < 30; i++) {
-            System.out.print(pop.getWSN(i).getNumberOfConnectedComps() + "  ");
+            System.out.print(pop.getRelayNodeNetwork(i).numberOfConnectedRnComps() + "  ");
             if (i == 9 || i == 19 || i == 29) {
                 System.out.println("");
             }
@@ -31,11 +31,13 @@ public class TCC {
 
         System.out.println("");
         for (int i = 0; i < 30; i++) {
-            System.out.print(pop.getWSN(i).getNumberOfConnectedComps() + "  ");
+            System.out.print(pop.getRelayNodeNetwork(i).numberOfConnectedRnComps() + "  ");
             if (i == 9 || i == 19 || i == 29) {
                 System.out.println("");
             }
         }
+        System.out.println("");
+        System.out.println(pop.getFittest().numberOfConnectedRnComps());
 
     }
 

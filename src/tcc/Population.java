@@ -11,45 +11,45 @@ package tcc;
  */
 public class Population {
 
-    WSN[] WSNS;
+    RelayNodeNetwork[] RelayNodeNetworks;
 
     /*
     *Inicializa a populacao, com dado numero de individuos
      */
     public Population(int popSize, boolean fillPopulation) {
-        WSNS = new WSN[popSize];
+        RelayNodeNetworks = new RelayNodeNetwork[popSize];
         //caso tenhamos que inicializar a população
         if (fillPopulation) {
             for (int i = 0; i < popSize; i++) {
-                WSN novaWsn = new WSN();
-                addWSN(i, novaWsn);
+                RelayNodeNetwork novaRelayNodeNetwork = new RelayNodeNetwork();
+                addRelayNodeNetwork(i, novaRelayNodeNetwork);
             }
         }
     }
 
-    //coloca uma WSN numa posicao específica da população
-    public void addWSN(int index, WSN wsn) {
-        WSNS[index] = wsn;
+    //coloca uma RelayNodeNetwork numa posicao específica da população
+    public void addRelayNodeNetwork(int index, RelayNodeNetwork relayNodeNetWork) {
+        RelayNodeNetworks[index] = relayNodeNetWork;
     }
 
     //retorna o individuo da posição index
-    public WSN getWSN(int index) {
-        return this.WSNS[index];
+    public RelayNodeNetwork getRelayNodeNetwork(int index) {
+        return this.RelayNodeNetworks[index];
     }
 
     //retorna o individuo mais apto da população
-    public WSN getFittest() {
-        WSN fittest = this.WSNS[0];
+    public RelayNodeNetwork getFittest() {
+        RelayNodeNetwork fittest = this.RelayNodeNetworks[0];
         //percorre todos os inivíduos e encontra o mais apto
         for (int i = 1; i < size(); i++) {
-            if (fittest.getFitness() <= getWSN(i).getFitness()) {
-                fittest = getWSN(i);
+            if (fittest.getFitness() <= getRelayNodeNetwork(i).getFitness()) {
+                fittest = getRelayNodeNetwork(i);
             }
         }
         return fittest;
     }
 
     public int size() {
-        return this.WSNS.length;
+        return this.RelayNodeNetworks.length;
     }
 }

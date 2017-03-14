@@ -1,5 +1,5 @@
 /*
- * Simula uma WSN 
+ * Simula uma RelayNodeNetwork 
  * 
  * 
  */
@@ -15,15 +15,15 @@ import org.jgrapht.graph.SimpleGraph;
  *
  * @author Labin-L1
  */
-public class WSN {
+public class RelayNodeNetwork {
 
-//inicializa a WSN com dado numero de sensores sensorList
-    public WSN() {
+//inicializa a RelayNodeNetwork com dado numero de sensores relayNodeList
+    public RelayNodeNetwork() {
         for (int i = 0; i < ConstantNumber.NUMBER_OF_SENSORS; i++) {
             Sensor sensor = new Sensor();
 
             //adiciona o sensor ao vetor
-            this.sensorList.add(sensor);
+            this.relayNodeList.add(sensor);
 
             //adiciona o vetor ao grafo
             this.graph.addVertex(sensor);
@@ -33,57 +33,57 @@ public class WSN {
         this.setGraphEdges();
     }
 
-    public WSN(int size) {
+    public RelayNodeNetwork(int size) {
         for (int i = 0; i < size; i++) {
-            this.sensorList.add(new Sensor());
+            this.relayNodeList.add(new Sensor());
         }
     }
 
-    //simula o grafo para esta WSN
+    //simula o grafo para esta RelayNodeNetwork
     private UndirectedGraph<Sensor, DefaultEdge> graph
             = new SimpleGraph<Sensor, DefaultEdge>(DefaultEdge.class);
 
-    //vetor com sensorList 
-    private ArrayList sensorList = new ArrayList<Sensor>();
+    //vetor com relayNodeList 
+    private ArrayList relayNodeList = new ArrayList<Sensor>();
 
     //retorna um sensor especifico
-    public Sensor getSensor(int index) {
-        return (Sensor) this.sensorList.get(index);
+    public Sensor getRelayNode(int index) {
+        return (Sensor) this.relayNodeList.get(index);
     }
 
     //adicona mais um sensor à rede
-    public void addSensor(int index, Sensor sensor) {
-        if (this.sensorList.get(index) == null) {
-            this.sensorList.add(index, sensor);
+    public void addRelayNode(int index, Sensor sensor) {
+        if (this.relayNodeList.get(index) == null) {
+            this.relayNodeList.add(index, sensor);
             this.graph.addVertex(sensor);
         } else {
-            this.sensorList.remove(index);
-            this.sensorList.add(index, sensor);
+            this.relayNodeList.remove(index);
+            this.relayNodeList.add(index, sensor);
             this.graph.addVertex(sensor);
         }
 
     }
 
-    //retorna o número de sensorList na rede
+    //retorna o número de relayNodeList na rede
     public int size() {
-        return this.sensorList.size();
+        return this.relayNodeList.size();
     }
 
     public UndirectedGraph<Sensor, DefaultEdge> getGraph() {
         return this.graph;
     }
 
-    public ArrayList getSensorList() {
-        return this.sensorList;
+    public ArrayList getRelayNodeList() {
+        return this.relayNodeList;
     }
 
-    //encontra todas as arestas do grafo deste WSN
+    //encontra todas as arestas do grafo deste RelayNodeNetwork
     private void setGraphEdges() {
-        for (int i = 0; i < this.sensorList.size(); i++) {
-            for (int j = 0; j < this.sensorList.size(); j++) {
+        for (int i = 0; i < this.relayNodeList.size(); i++) {
+            for (int j = 0; j < this.relayNodeList.size(); j++) {
                 if (i != j) {
-                    if (getSensor(i).distanceTo(getSensor(j)) <= ConstantNumber.SENSOR_RANGE) {
-                        this.graph.addEdge(getSensor(i), getSensor(j));
+                    if (getRelayNode(i).distanceTo(getRelayNode(j)) <= ConstantNumber.SENSOR_RANGE) {
+                        this.graph.addEdge(getRelayNode(i), getRelayNode(j));
                     }
                 }
             }
@@ -91,7 +91,7 @@ public class WSN {
     }
 
     //retorna o numero de grafos conexos (Gi)
-    public int getNumberOfConnectedComps() {
+    public int numberOfConnectedRnComps() {
         PrimMinimumSpanningTree sPanningTree;
 
         if (this.graph.edgeSet().size() != 0) {
@@ -117,10 +117,10 @@ public class WSN {
     //ou adicionado: Remove todas as arestas
     //para que novas sejam adicionadas
     public void refreshGraphEdges() {
-        for (int i = 0; i < this.sensorList.size(); i++) {
-            for (int j = 0; j < this.sensorList.size(); j++) {
+        for (int i = 0; i < this.relayNodeList.size(); i++) {
+            for (int j = 0; j < this.relayNodeList.size(); j++) {
                 if (i != j) {
-                    this.graph.removeAllEdges(getSensor(i), getSensor(j));
+                    this.graph.removeAllEdges(getRelayNode(i), getRelayNode(j));
                 }
             }
         }
@@ -128,19 +128,19 @@ public class WSN {
     }
 
     //remove um sensor da rede
-    public void removeSensor(int index) {
+    public void removeRelyNode(int index) {
         //remove tanto da lista de sensores quanto do grafo
-        this.sensorList.remove(index);
-        this.graph.removeVertex(getSensor(index));
+        this.relayNodeList.remove(index);
+        this.graph.removeVertex(getRelayNode(index));
 
         //atualiza as arestas
         this.refreshGraphEdges();
     }
 
     //muda as coordenadas do sensor na posição INDEX, para as coordenadas dadas
-    public void changeSensorPosition(int index, int newX, int newY) {
-        getSensor(index).setX(newX);
-        getSensor(index).setY(newY);
+    public void changeRNposition(int index, int newX, int newY) {
+        getRelayNode(index).setX(newX);
+        getRelayNode(index).setY(newY);
 
         //atualiza as arestas
         this.refreshGraphEdges();
@@ -151,7 +151,7 @@ public class WSN {
     //então quanto maior for o valor do fitness, 
     //mais apto é o individuo
     public double getFitness() {
-        double fitness = 1.0 / getNumberOfConnectedComps();
+        double fitness = 1.0 / numberOfConnectedRnComps();
         return fitness;
     }
 }

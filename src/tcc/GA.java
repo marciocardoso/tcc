@@ -20,7 +20,7 @@ public class GA {
         Population newPop = new Population(population.size(), false);
         //mantém o melhor indivíduo da nossa população
         if (elitism) {
-            newPop.addWSN(0, population.getFittest());
+            newPop.addRelayNodeNetwork(0, population.getFittest());
         }
 
         //regula o índice a partir do qual os novos indiívudos
@@ -34,32 +34,32 @@ public class GA {
         //loop por todos os indivíduos fazendo o crossover
         for (int i = elitismOffset; i < newPop.size(); i++) {
             //seleciona os pais
-            WSN parent1 = tournamentSelection(population);
-            WSN parent2 = tournamentSelection(population);
+            RelayNodeNetwork parent1 = tournamentSelection(population);
+            RelayNodeNetwork parent2 = tournamentSelection(population);
             //filho
-            WSN child = crossover(parent1, parent2);
-            newPop.addWSN(i, child);
+            RelayNodeNetwork child = crossover(parent1, parent2);
+            newPop.addRelayNodeNetwork(i, child);
         }
         // efetua a mutação, exceto no indivíduo que possuia elitismo
         for (int i = elitismOffset; i < newPop.size(); i++) {
-            mutate(newPop.getWSN(i));
+            mutate(newPop.getRelayNodeNetwork(i));
         }
         //devolve a nova população
         return newPop;
     }
     //crossover
 
-    public static WSN crossover(WSN parent1, WSN parent2) {
+    public static RelayNodeNetwork crossover(RelayNodeNetwork parent1, RelayNodeNetwork parent2) {
         //filho que será retornado    
-        WSN child;
+        RelayNodeNetwork child;
         int childSize;
 
         int startPos;
         int endPos;
 
         //tamanhos do maior e menor pais
-        WSN biggestParent;
-        WSN smallerParent;
+        RelayNodeNetwork biggestParent;
+        RelayNodeNetwork smallerParent;
 
         //o tamanho do filho terá o tamanho do maior pai
         if (parent1.size() >= parent2.size()) {
@@ -98,17 +98,17 @@ public class GA {
             }
         }
         //faz um loop colocando os sensores dos pais nos filhos
-        child = new WSN(childSize);
+        child = new RelayNodeNetwork(childSize);
         for (int i = 0; i < childSize; i++) {
             //coloca os primeiros elementos do maior pai
             if (i < startPos) {
-                child.addSensor(i, biggestParent.getSensor(i));
+                child.addRelayNode(i, biggestParent.getRelayNode(i));
             } //coloca os elementos intermediários sorteados do menor pai
             else if (i <= endPos) {
-                child.addSensor(i, smallerParent.getSensor(i));
+                child.addRelayNode(i, smallerParent.getRelayNode(i));
             } //completa o filho com os elementos restantes do maior pai
             else {
-                child.addSensor(i, biggestParent.getSensor(i));
+                child.addRelayNode(i, biggestParent.getRelayNode(i));
             }
         }
         child.refreshGraphEdges();
@@ -116,31 +116,31 @@ public class GA {
     }
 
     //método de mutação
-    public static void mutate(WSN wsn) {
+    public static void mutate(RelayNodeNetwork relayNodeNetwork) {
         //percorre os sensores da rede, decidindo ao acaso quais
         //sofrerão mutação
-        for (int i = 0; i < wsn.size(); i++) {
+        for (int i = 0; i < relayNodeNetwork.size(); i++) {
             if (Math.random() <= mutationRate) {
                 //gera as novas coordenadas do sensor
                 int newX = (int) (Math.random() * ConstantNumber.X_MAX);
                 int newY = (int) (Math.random() * ConstantNumber.Y_MAX);
                 //aplica as novas coordenadas
-                wsn.changeSensorPosition(i, newX, newY);
+                relayNodeNetwork.changeRNposition(i, newX, newY);
             }
         }
     }
 
     //seleciona indivíduos para crossover
-    private static WSN tournamentSelection(Population pop) {
+    private static RelayNodeNetwork tournamentSelection(Population pop) {
         // Cria uma população para torneio
         Population tournament = new Population(tournamentSize, false);
         // para cada indivíduo da população de torneio
         for (int i = 0; i < tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.size());
-            tournament.addWSN(i, pop.getWSN(randomId));
+            tournament.addRelayNodeNetwork(i, pop.getRelayNodeNetwork(randomId));
         }
         // pega o de maior fitness e retona
-        WSN fittest = tournament.getFittest();
+        RelayNodeNetwork fittest = tournament.getFittest();
         return fittest;
     }
 

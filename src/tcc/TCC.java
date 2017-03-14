@@ -17,32 +17,26 @@ public class TCC {
     public static void main(String[] args) {
 
         Population pop = new Population(30, true);
-        
-        for( int i = 0; i < 30; i++) {            
+
+        for (int i = 0; i < 30; i++) {
             System.out.print(pop.getWSN(i).getNumberOfConnectedComps() + "  ");
-            if( i==9 || i==19 || i==29) {
+            if (i == 9 || i == 19 || i == 29) {
                 System.out.println("");
             }
         }
-        
+
         for (int i = 0; i < 200; i++) {
             pop = GA.evolvePopulation(pop);
         }
-        
+
         System.out.println("");
-         for( int i = 0; i < 30; i++) {            
+        for (int i = 0; i < 30; i++) {
             System.out.print(pop.getWSN(i).getNumberOfConnectedComps() + "  ");
-            if( i==9 || i==19 || i==29) {
+            if (i == 9 || i == 19 || i == 29) {
                 System.out.println("");
             }
         }
-        
-        
-        
-        
-        
-        
-                
+
     }
 
 }

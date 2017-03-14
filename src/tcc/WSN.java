@@ -32,8 +32,9 @@ public class WSN {
         //cria as arestas do grafo
         this.setGraphEdges();
     }
+
     public WSN(int size) {
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             this.sensorList.add(new Sensor());
         }
     }
@@ -55,8 +56,7 @@ public class WSN {
         if (this.sensorList.get(index) == null) {
             this.sensorList.add(index, sensor);
             this.graph.addVertex(sensor);
-        }
-        else {
+        } else {
             this.sensorList.remove(index);
             this.sensorList.add(index, sensor);
             this.graph.addVertex(sensor);

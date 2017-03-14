@@ -47,7 +47,8 @@ public class GA {
         //devolve a nova população
         return newPop;
     }
-        //crossover
+    //crossover
+
     public static WSN crossover(WSN parent1, WSN parent2) {
         //filho que será retornado    
         WSN child;

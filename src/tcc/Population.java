@@ -22,13 +22,13 @@ public class Population {
         if(fillPopulation) {
             for(int i = 0; i < popSize; i++) {
                 WSN novaWsn = new WSN();
-                setWSN(i, novaWsn);
+                addWSN(i, novaWsn);
             }
         }
     }
     
     //coloca uma WSN numa posicao específica da população
-    public void setWSN(int index, WSN wsn) {
+    public void addWSN(int index, WSN wsn) {
         WSNS[index] = wsn;
     }
     
@@ -41,7 +41,7 @@ public class Population {
     public WSN getFittest() {
         WSN fittest = this.WSNS[0];
         //percorre todos os inivíduos e encontra o mais apto
-        for(int i = 1; i < getPopSize(); i++) {
+        for(int i = 1; i < size(); i++) {
             if(fittest.getFitness() <= getWSN(i).getFitness()) {
                 fittest = getWSN(i);
             }
@@ -51,7 +51,7 @@ public class Population {
     
     
     
-    public int getPopSize() {
+    public int size() {
         return this.WSNS.length;
     }
 }

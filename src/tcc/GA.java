@@ -10,11 +10,44 @@ package tcc;
  * @author Cardoso
  */
 public class GA {
-    
+
     private double mutationRate = 0.0125;
     private boolean elitism = true;
+    private int tournamentSize = 5;
 
-    //crossover
+    public Population evolvePopulation(Population population) {
+        //cria a nova população sem inicializá-la
+        Population newPop = new Population(population.size(), false);
+        //mantém o melhor indivíduo da nossa população
+        if (elitism) {
+            newPop.addWSN(0, population.getFittest());
+        }
+
+        //regula o índice a partir do qual os novos indiívudos
+        //serão adicionados
+        int elitismOffset;
+        if (elitism) {
+            elitismOffset = 1;
+        } else {
+            elitismOffset = 0;
+        }
+        //loop por todos os indivíduos fazendo o crossover
+        for (int i = elitismOffset; i < newPop.size(); i++) {
+            //seleciona os pais
+            WSN parent1 = tournamentSelection(population);
+            WSN parent2 = tournamentSelection(population);
+            //filho
+            WSN child = crossover(parent1, parent2);
+            newPop.addWSN(i, child);
+        }
+        // efetua a mutação, exceto no indivíduo que possuia elitismo
+        for (int i = elitismOffset; i < newPop.size(); i++) {
+            mutate(newPop.getWSN(i));
+        }
+        //devolve a nova população
+        return newPop;
+    }
+        //crossover
     public WSN crossover(WSN parent1, WSN parent2) {
         //filho que será retornado    
         WSN child;
@@ -94,6 +127,20 @@ public class GA {
                 wsn.changeSensorPosition(i, newX, newY);
             }
         }
+    }
+
+    //seleciona indivíduos para crossover
+    private WSN tournamentSelection(Population pop) {
+        // Cria uma população para torneio
+        Population tournament = new Population(tournamentSize, false);
+        // para cada indivíduo da população de torneio
+        for (int i = 0; i < tournamentSize; i++) {
+            int randomId = (int) (Math.random() * pop.size());
+            tournament.addWSN(i, pop.getWSN(randomId));
+        }
+        // pega o de maior fitness e retona
+        WSN fittest = tournament.getFittest();
+        return fittest;
     }
 
 }

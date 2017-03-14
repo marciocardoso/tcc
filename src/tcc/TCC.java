@@ -31,35 +31,14 @@ public class TCC {
         
         child = ga.crossover(pop.getWSN(0), pop.getWSN(1));
         
-        System.out.println(ga.teste[0]);
-        System.out.println(ga.teste[1]);        
-        System.out.println(ga.teste[2]);
-        System.out.println(ga.teste[3]);
-        System.out.println(ga.teste[4]);
+        System.out.println(child.getNumberOfConnectedComps());
         
-        for (int i = 0; i < 20; i++) {
-            if(i%5==0) {
-                System.out.println("");
-            }
-            System.out.print(pop.getWSN(0).getSensor(i) + "\t");
-            
-        }
-        System.out.println("");
-        for (int i = 0; i < 20; i++) {
-            if(i%5==0) {
-                System.out.println("");
-            }
-            System.out.print(pop.getWSN(1).getSensor(i) + "\t");
-            
-        }
-        System.out.println("");
-        for (int i = 0; i < 20; i++) {
-            if(i%5==0) {
-                System.out.println("");
-            }
-            System.out.print(child.getSensor(i) + "\t");
-            
-        }
+        ga.mutate(child);
+        
+        System.out.println(child.getNumberOfConnectedComps());
+        
+        
+        
                 
     }
 

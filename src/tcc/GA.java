@@ -11,11 +11,11 @@ package tcc;
  */
 public class GA {
 
-    private double mutationRate = 0.0125;
-    private boolean elitism = true;
-    private int tournamentSize = 5;
+    private static double mutationRate = 0.0125;
+    private static boolean elitism = true;
+    private static int tournamentSize = 5;
 
-    public Population evolvePopulation(Population population) {
+    public static Population evolvePopulation(Population population) {
         //cria a nova população sem inicializá-la
         Population newPop = new Population(population.size(), false);
         //mantém o melhor indivíduo da nossa população
@@ -48,7 +48,7 @@ public class GA {
         return newPop;
     }
         //crossover
-    public WSN crossover(WSN parent1, WSN parent2) {
+    public static WSN crossover(WSN parent1, WSN parent2) {
         //filho que será retornado    
         WSN child;
         int childSize;
@@ -115,7 +115,7 @@ public class GA {
     }
 
     //método de mutação
-    public void mutate(WSN wsn) {
+    public static void mutate(WSN wsn) {
         //percorre os sensores da rede, decidindo ao acaso quais
         //sofrerão mutação
         for (int i = 0; i < wsn.size(); i++) {
@@ -130,7 +130,7 @@ public class GA {
     }
 
     //seleciona indivíduos para crossover
-    private WSN tournamentSelection(Population pop) {
+    private static WSN tournamentSelection(Population pop) {
         // Cria uma população para torneio
         Population tournament = new Population(tournamentSize, false);
         // para cada indivíduo da população de torneio

@@ -25,17 +25,20 @@ public class TCC {
             }
         }
         
-        //teste3
-        GA ga = new GA();
-        WSN child;
+        for (int i = 0; i < 200; i++) {
+            pop = GA.evolvePopulation(pop);
+        }
         
-        child = ga.crossover(pop.getWSN(0), pop.getWSN(1));
+        System.out.println("");
+         for( int i = 0; i < 30; i++) {            
+            System.out.print(pop.getWSN(i).getNumberOfConnectedComps() + "  ");
+            if( i==9 || i==19 || i==29) {
+                System.out.println("");
+            }
+        }
         
-        System.out.println(child.getNumberOfConnectedComps());
         
-        ga.mutate(child);
         
-        System.out.println(child.getNumberOfConnectedComps());
         
         
         

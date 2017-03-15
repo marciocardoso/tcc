@@ -31,5 +31,29 @@ public class WSN {
     public static int size() {
         return sensorList.size();
     }
+    
+    // retorna o sensor com o maior valor de coornada X
+    // para que sejam gerador Relay Nodes dentro deste intervalo
+    public static Sensor getHighestX() {
+        Sensor highestX = getSensor(0);
+        for (int i = 1; i < size(); i++) {
+            if(getSensor(i).getX() >= highestX.getX()) {
+                highestX = getSensor(i);
+            }
+        }
+        return highestX;
+    }
+    
+    // retorna o sensor com o maior valor de coornada Y
+    // para que sejam gerador Relay Nodes dentro deste intervalo
+    public static Sensor getHighestY() {
+        Sensor highestY = getSensor(0);
+        for (int i = 1; i < size(); i++) {
+            if(getSensor(i).getY() >= highestY.getY()) {
+                highestY = getSensor(i);
+            }
+        }
+        return highestY;
+    }
 
 }
